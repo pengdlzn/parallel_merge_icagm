@@ -1,0 +1,89 @@
+%\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\usepackage{xurl} %make a link to break at the page margin
+%\usepackage{subfigure}
+\usepackage{setspace}
+\usepackage{geometry} % added 27-02-2014 Markus Englich
+\usepackage{epstopdf}
+% added 14-04-2016 Markus Englich - Recommendation by Sebastian Brocks
+\usepackage[labelsep=period]{caption} 
+\usepackage{blindtext}
+\graphicspath{{images/}}
+
+\usepackage{subcaption} %for \subfigure
+\usepackage{booktabs} %for \toprule
+
+\usepackage{amsmath} %for \begin{equation*}\end{equation*}
+
+
+%\usepackage{multicol}
+
+
+\geometry{a4paper, top=25mm, left=20mm, right=20mm, bottom=28mm}
+% added 27-02-2014 Markus Englich; bottom changed to 28mm by Juergen Bierwirth
+%\usepackage{enumitem}
+
+%\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+%\captionsetup{justification=centering} % thanks to Niclas Borlin 05-05-2016
+
+
+%\usepackage[headsepline,plainheadsepline]{scrlayer-scrpage}
+\usepackage{fancyhdr}
+\usepackage{natbib}% Citation support using natbib.sty
+\usepackage{xspace}
+
+\fancyhf{}
+\lhead{}
+\rhead{}
+%\chead{\thenumber}
+
+\fancypagestyle{first}{%
+    \fancyhead[L]{\includegraphics[height=1.15cm]{ica-logo.pdf}}
+    \fancyhead[R]{}
+    \renewcommand{\headrulewidth}{0.4pt}
+}
+
+% pagination in header from 2nd page onwards
+% changed 13-03-2018 by Juergen Bierwirth: 
+% 'page number' to 'page number' of 'number of total pages' of the document
+\fancyhead[EL,OR]{\fontfamily{\sfdefault}
+    \footnotesize\selectfont\thepage~of~\pageref{LastPage}{\vskip 18pt}} 
+\renewcommand{\headrulewidth}{0pt}
+%\fancyhead[EL]{\thepage}
+
+\newcommand{\Astar}{A$^{\!\star}$\xspace}
+
+\newcommand{\e}[1]{\times 10^{#1}}
+\newcommand{\fig}{Figure~}
+\newcommand{\eq}{Equation~}
+\newcommand{\fo}{Formula~}
+\newcommand{\sect}{Section~}
+\newcommand{\tabl}{Table~}
+\newcommand{\tabls}{Tables~}
+\newcommand{\tbl}{Table~}
+\newcommand{\tbls}{Tables~}
+\newcommand{\chap}{Chapter~}
+\newcommand{\figs}{Figures~}
+\newcommand{\eqs}{Equations~}
+\newcommand{\fos}{Formulas~}
+\newcommand{\sects}{Sections~}
+\newcommand{\appx}{Apendix~}
+
+\newcommand{\chaps}{Chapters~}
+\newcommand{\p}{p.~}
+\newcommand{\pp}{pp.~}
+\newcommand{\eg}{e.g.,}
+\newcommand{\ie}{i.e.,}
+
+\pagestyle{fancy}
+
+%\newcommand*\varhrulefill[1][0.4pt]
+%   {\leavevmode\leaders\hrule height#1\hfill\kern0pt}
