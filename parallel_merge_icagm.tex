@@ -117,7 +117,7 @@ to generalize buildings
 \citep[\eg][]{Li2017_Building,Touya2017Progressive},
 to transform road networks or river networks
 \citep[\eg][]{Suba2016Road,Chimani2014Eat,Huang2017Matrix},
-and to transit administrative boundaries
+and to transform administrative boundaries
 \citep[\eg][]{Peng2016Admin}.
 
 %\citep[\eg][]{Pantazis2009a,Pantazis2009b}, 
@@ -143,7 +143,7 @@ and to transit administrative boundaries
 Area objects are important features on maps. 
 When users zoom out,
 some area objects become too tiny to be seen,
-which result in visual clutter.
+which results in visual clutter.
 The clutter can be avoided by generalizing the 
 area objects.
 The generalization operators include
@@ -160,7 +160,7 @@ However, if zooming is realized by switching between
 some levels of map representations, 
 large and discrete changes usually happen.
 This kind of changes may cause users to lose track of
-their interested area objects \citep{vanKreveld2001}.
+their area objects of interest \citep{vanKreveld2001}.
 In order to solve this problem, 
 we smoothly and parallelly generalize the area objects.
 
@@ -251,7 +251,7 @@ and present our future work.
 
 
 \subsection{Merging of area objects}
-Many researches have been devoted to the merging of area objects.
+Much research has been devoted to the merging of area objects.
 \citet{HaunertWolff2010AreaAgg} developed a method based on
 mixed-integer programming to merge area objects
 in order to generate a map at a certain scale.
@@ -287,18 +287,20 @@ aggregating, reclassifying, and simplifying.
 %\citet{Regnauld2007Amalgamation}
 
 \subsection{Gradual merging of area objects}
+\label{sec:gradual_merge}
+
 To provide scale transition of small changes, 
 \citet{vanOosterom2005} proposed 
 the topological Generalized Area Partitioning (tGAP) tree,
 where in each step the least important area is merged into
 its most compatible neighbor.
-\citet[\chap2]{Peng2019Thesis} tried to 
+\citet{Peng2020AreaAgg} tried to 
 find an optimal sequence to merge area objects 
 based on the \Astar algorithm or an integer linear program.
 %A comparison to a greedy algorithm showed that 
 %the \Astar algorithm improves the quality of the merging sequences
 %in the sense of the class changes and the area compactnesses.
-\citet{Suba2016Road} continuously generalized a planar map of road network.
+\citet{Suba2016Road} continuously generalized a planar map of a road network.
 %In each step, they process the least important face.
 %Taking into account the local condition of the face
 %(\eg~no compatible neighbor at the same side of the road),
@@ -322,7 +324,7 @@ based on the \Astar algorithm or an integer linear program.
 %the scale transition of a map can be realized smoothly
 %by slicing the SSC \citep[see][]{Meijers2020Web}.
 \Citet{vanOosterom2014Support} 
-explained the concept of the space-scale cube (SSC).
+developed the concept of the space-scale cube (SSC).
 The bottom of the SSC is a detailed topographic map,
 and all the area objects extrude along the $z$-axis.
 In the SSC, an area on the map becomes a polyhedron, and
@@ -344,7 +346,7 @@ the wall starts to tilt when the expansion begins.
 %They showed how to request only a part of a large dataset of a vario-scale map.
 %They made chunks of the SSC data
 %so that they were able to send only the chunks relevant 
-%to users' interested place.
+%to users' place of interest.
 %They showed how to efficiently slice the SSC 
 %to output a web map at a given scale 
 %using the GPU at the client side using WebGL in the browser.
@@ -357,7 +359,11 @@ To build an SSC of the smooth tGAP,
 to merge a pair of areas, 
 which are the \emph{Single flat plane}, 
 the \emph{Zipper}, and the \emph{Eater}.
-%Basically, the \emph{winner} area gradually expands over the \emph{loser} area.
+Basically, the \emph{winner} area gradually expands over the \emph{loser} area.
+We will use the \emph{Eater} because it works for all kinds of polygons,
+While the other two methods have limitations for some special cases.
+For example, the two other methods do not work for some concave polygons.
+
 
 
 
@@ -377,7 +383,7 @@ In morphing polylines, the points of the polylines are moved parallelly
 In those methods, the polylines and the buildings 
 were generalized parallelly and independently.
 \citet{Peng2017Building} and \citet{Touya2017Progressive}
-generalized building to built-up areas.
+generalized buildings to built-up areas.
 However, there is no simple relationship 
 between their intermediate-scale maps and their source maps.
 Therefore, all the intermediate-scale maps of buildings have to be
@@ -426,9 +432,9 @@ which is network intensive.
 
 
 In order to provide smooth merging
-so that map users can easily keep track of their interested areas,
+so that map users can easily keep track of their area objects of interest,
 we merge by gradually expanding an area over another area
-(see \fig\ref{fig:intro}q).
+(see \fig\ref{fig:intro}q for an ongoing expansion).
 This expansion can be realized 
 by slicing the space-scale cube \citep[SSC,][]{vanOosterom2014Support} 
 of \fig\ref{fig:ssc}a from bottom to top.
@@ -436,10 +442,8 @@ For example,  \fig\ref{fig:intro}q is obtained by slicing
 \fig\ref{fig:ssc}a at~$z= 250$.
 The details of slicing an SSC are illustrated in \citet{Meijers2020Web}.
 The SSCs of \fig\ref{fig:ssc} were built 
-based on the \emph{Eater} of \citet{Suba2014Merge}.
-The \emph{Eater} is used because it works for all kinds of polygons.
-%while the other two methods have limitations for some special cases.
-%For example, the two other methods do not work for some concave polygons.
+based on the \emph{Eater}
+(see \sect\ref{sec:gradual_merge}).
 %The content of an SSC is stored in an OBJ file,
 %and the OBJ file can be visualized by software ParaView
 %(see \fig\ref{fig:ssc}).
@@ -447,8 +451,8 @@ In \fig\ref{fig:ssc}, the $z$-coordinates are $100$ times of
 the state values in \fig\ref{fig:intro}.
 We did this multiplication so that the contents can be better observed;
 otherwise, the two SSCs will be very short when displayed.
-Note that the merging is independent of users' interested areas;
-the merging operations happen outside the interested region 
+Note that the merging is independent of users' area objects of interest;
+the merging operations happen outside the region of interest 
 are also realized by expanding.
 
 
@@ -457,7 +461,7 @@ are also realized by expanding.
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=1,scale=0.85]{introduction}
+\includegraphics[page=1,scale=0.85]{intro}
 \caption{A comparison of different scale-transition strategies.
 Each arrow inside the subfigures indicates a merging operation.
 The arrow in the right-hand side indicates the states of zooming out.
@@ -479,13 +483,13 @@ The numbers are the face IDs.
 \centering
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
-\includegraphics[page=4,width=0.9\linewidth]{methodology}
+\includegraphics[page=4,width=0.7\linewidth]{methodology}
 \caption{The SSC of the single merging of \figs\ref{fig:intro}d--j.}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
-\includegraphics[page=5,width=0.9\linewidth]{methodology}
+\includegraphics[page=5,width=0.7\linewidth]{methodology}
 \caption{The SSC of the parallel merging of \figs\ref{fig:intro}k--o.}
 \end{subfigure}
 \caption{
@@ -499,6 +503,8 @@ while in the right SSC multiple merging events may happen at the same state.
 
 We define an \emph{event} as a single generalization operation, 
 such as merging an area into a neighbor.
+Two areas are neighbors if they share a common boundary with length larger than 0
+(sharing a point does not make the two areas neighbors).
 For example, \fig\ref{fig:intro}e is obtained from 
 \fig\ref{fig:intro}d by processing one merging event.
 Similarly, \fig\ref{fig:intro}l is obtained from 
@@ -530,7 +536,7 @@ Therefore, \citet{vanOosterom2014Support}
 suggested paralleling the generalization operations,
 but no implementation, testing, or assessment of the idea was provided.
 Second, parallelization brings smoother zooming.
-Although the SSC is available for outputting a map at any scale,
+Although the SSC allows to deliver a map at any scale,
 only $16$ frames by default will be created to display in one second.
 When showing an animation zooming, 
 we set $16$ as the default value of frames per second (FPS).
@@ -545,8 +551,9 @@ For example, if the consecutive frames are
 then users can only see discrete merging.
 In contrast, if the consecutive frames are 
 \figs\ref{fig:intro}k, \ref{fig:intro}r, and \ref{fig:intro}l,
-then users can really see an ongoing expanding. 
-The more merging operations we parallel, the smoother the expanding is.
+then users can really see an ongoing expansion. 
+The more merging operations we parallel, 
+the smoother the expansion process seems.
 
 %\textbf{one step 16 frames or one second 16 frames?}
 %answer: one second 16 frames
@@ -557,7 +564,7 @@ the area objects involved in different merging events of the same step
 must not be neighbors, 
 which makes the merging events independent from each other.
 In this way, it is easy for us to maintain the topology of the map.
-%Second, users can keep track of their interested areas more easily
+%Second, users can keep track of their area objects of interest more easily
 %than merging several areas into a single one.
 In order to realize the requirement,
 we block the neighbors of the areas once we have found an event.
@@ -577,8 +584,8 @@ the animation duration of zooming from one state to another state.
 \subsection{A greedy algorithm}
 \label{sec:greedy_algo}
 
-In the greedy algorithm, 
-we need to obtain the most compatible neighbor for a given area.
+For each merging event, our greedy algorithm tries to 
+merge the least important area into its most compatible neighbor.
 %There are many ways of defining the most compatible neighbor.
 %For example, \citet{Cheng2006} proposed three choices, i.e.,
 %the neighbor has the largest size, 
@@ -590,11 +597,13 @@ we need to obtain the most compatible neighbor for a given area.
 %and the combination of the two areas should be compact;
 %they defined the class distance based on a binary tree
 %according to the codes of the classes.
-We define the importance and the compatibility as
-the same as %\citet{vanOosterom2005,vanPutten1998NewGAP}.
+We define the importance and the compatibility according to
+%\citet{vanOosterom2005,vanPutten1998NewGAP}.
 \citet{vanPutten1998NewGAP}.
 That is, the importance of an area is the multiplication 
 of its size and its class weight.
+Currently, all the class weights are set to 1,
+which leads to that the smallest area is the least important.
 The compatibility value between a pair of areas is 
 the multiplication of the common boundary's length and 
 the class similarity of the two areas.
@@ -607,7 +616,7 @@ the class similarity of the two areas.
 The process starts with state~$s=0$ and a detailed map of area objects, $M_0$.
 Expression~$|M_s|$ denotes the number of area objects of the map at state~$s$.
 Parallel parameter~$r_\mathrm{parallel}$ specifies 
-the proportion (\ie~percentage, when multiplied by~$100$) 
+the proportion (\ie~percentage, when multiplied by~$100$) of the number
 of the area objects that
 we expect to merge parallelly,
 where~$r_\mathrm{parallel} \in [0,1]$.
@@ -636,16 +645,18 @@ In the algorithm, an area is \emph{free} if
 it is not involved in an event and is not blocked.
 \fig\ref{fig:blocked_polygons} shows an example of blocking
 the surrounding neighbors of~$a_\mathrm{least}$ and~$a_\mathrm{nbr}$.
-Note that the area shares only a vertex 
-with the least important area is not blocked.
+Note that the gray area in \fig\ref{fig:blocked_polygons}a is not blocked
+because it is not considered a neighbor of the green area
+(sharing a point does not make the two areas neighbors). 
 
 
 
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=1]{methodology}
-\caption{The flowchart of our greedy algorithm.
+\includegraphics[page=1,scale=0.85]{methodology}
+\caption{The flowchart of our greedy algorithm
+    to find the merging events for all the steps.
 }
 \label{fig:greedy_framework}
 \end{figure*}
@@ -653,8 +664,9 @@ with the least important area is not blocked.
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=2]{methodology}
-\caption{The process of finding parallel merging events for a step.
+\includegraphics[page=2,scale=0.85]{methodology}
+\caption{The process of finding parallel merging events for a step, 
+    where parallel parameter $r_\mathrm{parallel} = 0.3$.
     (a) From all the free areas,
 	the least important one is selected to merge into
 	its most compatible neighbor.
@@ -746,7 +758,7 @@ so that it is easy to see when a face should appear or disappear
 where all other columns, except face\_id, are hidden).
 For zooming out,
 when the slicing plane arrives at the low state of a face,
-the face appear because of the merging of two faces.
+the face appears because of the merging of two faces.
 When the slicing arrives at the high state,
 the face should merge with another area.
 Comparing between the tables of single merging 
@@ -757,6 +769,7 @@ are changed from~$1$ to~$2$
 (see \tbl\ref{tbl:face_tgap}).
 Also, the $s_\mathrm{low}$ value of face~8 is changed from~1 to~2
 (see \tbl\ref{tbl:face_tgap}).
+Note that the face ids are defined in \fig\ref{fig:intro}.
 Similarly, the columns and records of 
 both the edge table and the face-hierarchy table 
 will be changed accordingly.
@@ -849,7 +862,7 @@ The new area takes the combined place of the pair of areas.
 Take \fig\ref{fig:intro} as an example, 
 area~1 is merged into area~2 (\figs\ref{fig:intro}d), 
 and area~8 is generated to take the combined place (\figs\ref{fig:intro}e).
-The tilted triangle is the one spans 
+The tilted triangle is the one that spans 
 from~$z= 0$ to~$z=100$ (\ie~from state~0 to state~1)
 in \fig\ref{fig:ssc}a.
 In \tbl\ref{tbl:face_tgap}a, 
@@ -1024,7 +1037,8 @@ where parameter~$N_\mathrm{b} = |M_0|$
 is the number of areas on the base map,
 parameter~$S_\mathrm{b}$ is the scale denominator of the base map,
 and variable~$E_\mathrm{t}$ is the total number of events 
-happening from the base map to the map at scale~$1:S_\mathrm{t}$.
+happening from the base map to the map at scale~$1:S_\mathrm{t}$
+(in this case, an event is that an area is merged into another one).
 \eq\ref{eq:equal_density} yields
 \begin{equation}
 \label{eq:E_t}
@@ -1079,8 +1093,8 @@ have introduced the zooming factor and the zooming duration.
 They allowed users to set the two parameters,
 which is also the case in this paper.
 %(see \fig\ref{fig:interaction_settings}).
-Because there is no enough space to show all the deductions,
-we directly show some results below.
+Because of the page limit, 
+we skip the deductions and show some conclusions as following. 
 The animation duration of a set of events happening sequentially is
 \begin{equation*}
 \label{eq:t_single}
@@ -1320,7 +1334,7 @@ In each step, we want to parallelly merge some proportion of the areas.
 We tried three cases: 0.1\%, 1\%, and 10\%.
 The three versions of map can be browsed online.\footnote{%
 All of our web maps can be found at
-\url{https://congengis.github.io/webmaps/2020/05/merge/}.}
+\url{https://pengdlzn.github.io/webmaps/2020/10/merge/}.}
 As no paper has recommended values for 
 the zooming factor or the zooming duration,
 we respectively set the default values to $1$ and $1\,$s, 
@@ -1331,7 +1345,7 @@ When zooming on our web maps with different parallel parameters,
 we observed that the impressions of the maps 
 based on single merging\footnote{%
 See the web map at
-\url{https://congengis.github.io/webmaps/2020/05/merge/single-merging/}.} 
+\url{https://pengdlzn.github.io/webmaps/2020/10/merge/top10nl-single-merging.html}.} 
 and based on parallel merging with parameter~$r_\mathrm{parallel}= 0.001$ 
 are almost the same.
 The reason is that the smooth merging happens too fast,
@@ -1343,7 +1357,7 @@ and parallel merging,
 we put two maps together (see \fig\ref{fig:comparison}),
 where the parallel parameter is~$0.1$.\footnote{%
 See the map of comparison at
-\url{https://congengis.github.io/webmaps/2020/05/merge/0.1/comparer.html}.}  
+\url{https://pengdlzn.github.io/webmaps/2020/10/merge/top10nl-0.1-comparer.html}.}  
 
 
 
@@ -1398,11 +1412,11 @@ See the map of comparison at
 
 
 %In order to provide smooth merging
-%so that map users can easily keep track of their interested areas,
+%so that map users can easily keep track of their area objects of interest,
 %we merge by gradually expanding an area over another area
 %(see \fig\ref{fig:intro}q).
-%Note that the merging is independent of users' interested areas;
-%the merging operations happen outside the interested region 
+%Note that the merging is independent of users' area objects of interest;
+%the merging operations happen outside the region of interest
 %are also realized by expanding.
 %This expansion can be realized 
 %by slicing the space-scale cube (SSC) of
@@ -1508,7 +1522,7 @@ See the map of comparison at
 %If an adjacent area is involved in another merging event,
 %then it is complicated to update the adjacent area's boundaries
 %for the two merging events.
-%Second, users can keep track of their interested areas more easily
+%Second, users can keep track of their area objects of interest more easily
 %than merging several areas into a single one.
 %In order to realize the requirement,
 %we block the neighbors of the areas once we have found an event.
@@ -2525,6 +2539,11 @@ Another future work is to investigate
 how much map users benefit from our parallel merging.
 We need to conduct some usability tests based on the experience of
 \citet[\sect6.7]{Suba2017Thesis} and \citet{Midtbo2007}.
+We currently drive the merging by the relationship 
+between the number of areas and the scale;
+an other strategy is to drive 
+by the relationship between the size of the smallest area and the scale.
+We also need to test which of the two strategies is better.
 
 
 %\subsection{Conclusion}
